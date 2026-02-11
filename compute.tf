@@ -17,7 +17,7 @@ resource "azurerm_windows_virtual_machine" "vm" {
   name                = "webvm-${count.index}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  size                = "Standard_B2s"
+  size                = "Standard_D2s_v3"
   admin_username      = "azureuser"
   admin_password      = "Password@12345!"
   tags                = local.required_tags
