@@ -4,14 +4,14 @@ resource "azurerm_public_ip" "appgw_ip" {
   resource_group_name = azurerm_resource_group.rg.name
   allocation_method   = "Static"
   sku                 = "Standard"
-  tags                = var.common_tags
+  tags                = local.required_tags
 }
 
 resource "azurerm_application_gateway" "appgw" {
   name                = "app-gateway"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  tags     = var.common_tags
+  tags                = local.required_tags
 
   sku {
     name     = "Standard_v2"
@@ -54,10 +54,10 @@ resource "azurerm_application_gateway" "appgw" {
 
   request_routing_rule {
     name                       = "rule1"
-    rule_type                 = "Basic"
-    http_listener_name        = "http-listener"
-    backend_address_pool_name = "backend-pool"
-    backend_http_settings_name= "http-settings"
-    priority                  = 1
+    rule_type                  = "Basic"
+    http_listener_name         = "http-listener"
+    backend_address_pool_name  = "backend-pool"
+    backend_http_settings_name = "http-settings"
+    priority                   = 1
   }
 }
