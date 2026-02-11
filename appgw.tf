@@ -4,12 +4,14 @@ resource "azurerm_public_ip" "appgw_ip" {
   resource_group_name = azurerm_resource_group.rg.name
   allocation_method   = "Static"
   sku                 = "Standard"
+  tags                = var.common_tags
 }
 
 resource "azurerm_application_gateway" "appgw" {
   name                = "app-gateway"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
+  tags     = var.common_tags
 
   sku {
     name     = "Standard_v2"
