@@ -4,6 +4,6 @@ variable "vm_count" { default = 2 }
 
 locals {
   required_tags = {
-    ENV = "PRO"
+    PROJECT = "IT"
   }
 }
