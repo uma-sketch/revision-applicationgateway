@@ -3,6 +3,7 @@ resource "azurerm_network_interface" "nic" {
   name                = "nic-${count.index}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
+  tags                = local.required_tags
 
   ip_configuration {
     name                          = "internal"
@@ -19,8 +20,11 @@ resource "azurerm_windows_virtual_machine" "vm" {
   size                = "Standard_B2s"
   admin_username      = "azureuser"
   admin_password      = "Password@12345!"
+  tags                = local.required_tags
 
-  network_interface_ids = [azurerm_network_interface.nic[count.index].id]
+  network_interface_ids = [
+    azurerm_network_interface.nic[count.index].id
+  ]
 
   os_disk {
     storage_account_type = "Standard_LRS"
